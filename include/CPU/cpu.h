@@ -2,6 +2,10 @@
 
 #include <CPU/Registers/Register.h>
 
+#define CPU_16_BIT 1
+#define CPU_32_BIT 2
+#define CPU_64_BIT 3
+
 #define FLAG_CF   (1U << 0)   // Carry Flag
 #define FLAG_PF   (1U << 2)   // Parity Flag
 #define FLAG_AF   (1U << 4)   // Auxiliary Carry
@@ -65,10 +69,15 @@ typedef struct
     uint64_t CR8;
 
     //EXTRA
-    uint8_t Mode; // 1 is 16-bit 2 32-bit protected mode 4 is 64-bit long mode
-
+    uint8_t MaxMode; // 1 is 16-bit 2 32-bit protected mode 4 is 64-bit long mode
+    uint8_t CurrentMode;
     uint32_t flags;
+
+    bool halt;
 }CPU;
 
+void InitlizeCPU(CPU* cpu,uint8_t mode);
+
+void FetchInstruction(CPU* cpu);
 
 

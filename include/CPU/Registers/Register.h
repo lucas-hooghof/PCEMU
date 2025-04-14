@@ -27,3 +27,4 @@ typedef enum
 }REG;
 
 void SetValueInRegister(Register* reg,REG registerpart,uint64_t value);
+uint64_t GetValueInRegister(Register* reg,REG registerpart);

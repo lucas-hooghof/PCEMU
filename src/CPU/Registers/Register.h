@@ -46,6 +46,39 @@ void SetValueInRegister(Register* reg,REG registerpart,uint64_t value)
             reg->ereg = (reg->ereg & 0xFFFF0000) | (uint32_t)reg->xreg;
             reg->rreg = (reg->rreg & 0xFFFFFFFF00000000) | (uint64_t)reg->ereg;
 
-        }
+        }break;
     }
+}
+
+uint64_t GetValueInRegister(Register* reg,REG registerpart)
+{
+    switch(registerpart)
+    {
+        case RREG:
+        {
+            return (uint64_t)reg->rreg;
+        }break;
+
+        case EREG:
+        {
+            return (uint64_t)reg->ereg;
+        }break;
+
+        case XREG:
+        {
+            return (uint64_t)reg->xreg;
+        }break;
+
+        case HREG:
+        {
+            return (uint64_t)reg->hreg;
+        }break;
+
+        case LREG:
+        {
+            return (uint64_t)reg->lreg;
+        }break;
+    }
+
+    return 0;
 }

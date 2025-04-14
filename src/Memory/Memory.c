@@ -55,3 +55,15 @@ void* ReadDataFromMemory(uint64_t Emulatedaddress, size_t size)
     void* memory = (void*)EMULATOR_TO_REAL(Emulatedaddress);
     return memory;
 }
+
+uint8_t GetByteFromMemory(uint64_t EmulatedAddress)
+{
+    uint8_t* mem = (uint8_t*)AllotedMemory+EmulatedAddress;
+
+    return *mem;
+}
+uint16_t GetWordFromMemory(uint64_t EmulatedAddress)
+{
+    uint8_t* base = (uint8_t*)AllotedMemory + EmulatedAddress;
+    return base[0] | (base[1] << 8);  
+}

@@ -20,3 +20,6 @@ void DeinitilizeMemory();
 
 void WriteDataIntoMemory(void* memory,uint64_t Emulatedaddress,size_t size);
 void* ReadDataFromMemory(uint64_t Emulatedaddress, size_t size);
+
+uint8_t GetByteFromMemory(uint64_t EmulatedAddress);
+uint16_t GetWordFromMemory(uint64_t EmulatedAddress);
