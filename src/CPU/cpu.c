@@ -1,5 +1,7 @@
 #include <CPU/cpu.h>
 
+#include <CPU/Opcodes.h>
+#include <core/PrintingErrors.h>
 //Private
 uint64_t GetAddress(CPU* cpu,uint64_t address,uint16_t SegmentValue)
 {
@@ -26,4 +28,17 @@ void InitlizeCPU(CPU* cpu,uint8_t mode)
 
     SetValueInRegister(&cpu->InstructionPointer,XREG,0xFFF0);
     cpu->cs = 0xFFFF;
+}
+
+void FetchInstruction(CPU* cpu)
+{
+    uint64_t instructionAddress = 0;
+    if (cpu->CurrentMode == CPU_16_BIT)
+    {
+        uint16_t Address = GetValueInRegister(&cpu->InstructionPointer,XREG);
+        instructionAddress = GetAddress(cpu,Address,cpu->cs);
+        SetValueInRegister(&cpu->InstructionPointer,XREG,Address+1);
+    }
+
+    uint8_t OpcodeByte = GetByteFromMemory(instructionAddress);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <CPU/Registers/Register.h>
+#include <Memory/Memory.h>
 
 #define CPU_16_BIT 1
 #define CPU_32_BIT 2

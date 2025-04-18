@@ -14,6 +14,11 @@ int main(int argc,char* argv[])
 
     CPU cpu;
     InitlizeCPU(&cpu,CPU_16_BIT);
+    uint64_t emulatedaddress = cpu.cs << 4;
+    emulatedaddress += 0xFFF0;
+    uint64_t trueAddress = EMULATOR_TO_REAL(emulatedaddress);
+    uint8_t* memory = (uint8_t*)trueAddress;
+    *memory = 0xF4;
     while (true)
     {
         if (cpu.halt)
@@ -21,7 +26,7 @@ int main(int argc,char* argv[])
             continue;
         }
 
-        
+        FetchInstruction(&cpu);
     }
     DeinitilizeMemory();
     return 0;
